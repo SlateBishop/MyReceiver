@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import ru.gb.makulin.myreceiver.databinding.ActivityMainBinding
@@ -20,8 +21,10 @@ class MainActivity : AppCompatActivity() {
 
     private val receiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
+            Log.d("mylogs", "receiver intent action ${intent?.action.toString()}" )
             binding.root.addView(TextView(context).apply {
                 val msg = intent?.getStringExtra(SENDED_MSG_EXTRA)
+                Log.d("mylogs", "receiver message $msg" )
                 text = "Полученное сообщение: $msg"
             })
         }
